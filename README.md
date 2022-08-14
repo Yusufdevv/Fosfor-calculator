@@ -8,6 +8,6 @@
 
 ## The following changes should be made to this program: 
 ### - State management
-### - Beautiful desigb
+### - Beautiful design
 ### - App icon
 
