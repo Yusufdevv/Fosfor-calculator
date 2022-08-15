@@ -118,38 +118,62 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   // #Hisobla_Button
-                  GestureDetector(
-                    onTap: () {
-                      final isValidForm = formKey.currentState!.validate();
-                      if (isValidForm) {
-                        setState(() {
-                          calculateFosfor();
-                        });
-                      }
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 100),
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20),
+
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 18),
+                        shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
                       ),
-                      child: const Center(
-                          child: Text(
+                      onPressed: () {
+                        final isValidForm = formKey.currentState!.validate();
+                        if (isValidForm) {
+                          setState(() {
+                            calculateFosfor();
+                            if (_result != null) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: const Text('Natija'),
+                                        content: Text(
+                                          "Zarur Fosfor miqdori => ${_result?.toStringAsFixed(2)}",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text(
+                                                'OK',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 22),
+                                              ))
+                                        ],
+                                      ));
+                            }
+                          });
+                        }
+                      },
+                      child: const Text(
                         "Hisobla",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w500),
                       )),
-                    ),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),
                   if (_result != null)
                     Text(
-                        "Zarur Fosfor miqdori => ${_result?.toStringAsFixed(2)}", style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                      "Zarur Fosfor miqdori => ${_result?.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
                 ],
               ),
               const Spacer(),
